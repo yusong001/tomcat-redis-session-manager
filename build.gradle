@@ -44,8 +44,13 @@ artifacts {
   archives sourcesJar
 }
 
-signing {
-  sign configurations.archives
+//signing {
+//  sign configurations.archives
+//}
+
+task copyJars(type: Copy) {
+  from configurations.runtime
+  into 'dist'  
 }
 
 uploadArchives {
@@ -53,9 +58,9 @@ uploadArchives {
     mavenDeployer {
       beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-        authentication(userName: sonatypeUsername, password: sonatypePassword)
-      }
+      //repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+      //  authentication(userName: sonatypeUsername, password: sonatypePassword)
+      //}
       //repository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
       //  authentication(userName: sonatypeUsername, password: sonatypePassword)
       //}
